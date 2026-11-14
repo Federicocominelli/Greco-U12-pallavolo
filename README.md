@@ -11,10 +11,13 @@ Webapp per gestire la squadra Under 12: giocatori con numero di maglia, valutazi
 4. Dopo circa un minuto l'app è online su `https://<tuo-utente>.github.io/<nome-repo>/`.
 
 ## Dove sono salvati i dati
-In questa versione i dati restano **nel browser** del dispositivo che usi (localStorage): non vengono inviati a GitHub né condivisi tra dispositivi.
-- Non cancellare i dati di navigazione del sito.
-- Per spostare i dati su un altro dispositivo o fare una copia di sicurezza: scheda **Archivio → Copia backup**, poi **Ripristina da backup** sull'altro dispositivo.
-- Al primo avvio la rosa è precompilata con i 13 giocatori, tutti con voto iniziale 5.
+I dati sono salvati in un database **Firebase (Firestore)** condiviso, protetto da login con email e password: gli allenatori che accedono vedono e modificano gli stessi dati da qualsiasi dispositivo.
+- Gli utenti si creano in Firebase Console → Authentication → Users (non esiste la registrazione dall'app).
+- Le regole di Firestore consentono lettura e scrittura solo agli utenti autenticati.
+- Il documento unico `squadra/main` contiene giocatori, valutazioni e partite (come testo JSON).
+- Al logout i dati vengono rimossi dal dispositivo.
+- In Archivio c'è comunque "Copia backup" / "Ripristina da backup" per una copia di sicurezza.
+- Al primo avvio, se il database è vuoto, la rosa viene precompilata con i 13 giocatori (voto iniziale 5).
 
 ## Come funzionano le formazioni
 - Si scelgono i presenti e il capitano (che gioca il primo set).
